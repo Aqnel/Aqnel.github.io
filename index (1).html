@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agnel Joseph — Electrical Engineering Student</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #f7f6f2;
+      --surface:  #ffffff;
+      --border:   #e4e2da;
+      --text:     #1a1917;
+      --muted:    #6b6963;
+      --accent:   #2a4f8a;
+      --tag-bg:   #eeecea;
+      --tag-text: #3d3b35;
+      --mono:     'DM Mono', monospace;
+      --sans:     'DM Sans', sans-serif;
+      --radius:   10px;
+      --max:      760px;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+      padding: 0 1.5rem;
+    }
+
+    .wrap { max-width: var(--max); margin: 0 auto; }
+
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+    }
+    nav .inner {
+      max-width: var(--max); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    nav .logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.02em; text-decoration: none; }
+    nav ul { list-style: none; display: flex; gap: 1.75rem; }
+    nav a { text-decoration: none; font-size: 14px; color: var(--muted); transition: color 0.15s; }
+    nav a:hover { color: var(--text); }
+
+    .hero { padding: 5rem 0 4rem; border-bottom: 1px solid var(--border); }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 12px; color: var(--accent);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem); font-weight: 300;
+      line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.5rem;
+    }
+    .hero h1 span { font-weight: 500; }
+    .hero p { font-size: 17px; color: var(--muted); max-width: 520px; margin-bottom: 2rem; font-weight: 300; }
+    .hero-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 0.55rem 1.2rem; border-radius: var(--radius);
+      font-size: 14px; font-family: var(--sans); cursor: pointer;
+      text-decoration: none; transition: background 0.15s, color 0.15s;
+    }
+    .btn-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+    .btn-primary:hover { background: #1d3c6e; border-color: #1d3c6e; }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: var(--surface); }
+
+    section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+    .section-label {
+      font-family: var(--mono); font-size: 11px; color: var(--muted);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2.5rem;
+    }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+    .skill-group h3 { font-size: 13px; font-weight: 500; margin-bottom: 0.6rem; color: var(--text); }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-family: var(--mono); font-size: 12px; background: var(--tag-bg); color: var(--tag-text); padding: 3px 8px; border-radius: 5px; }
+
+    .projects-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 1rem; align-items: start; transition: border-color 0.15s;
+    }
+    .project-card:hover { border-color: #c8c5bc; }
+    .project-card .meta { display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem; }
+    .project-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 0.4rem; }
+    .project-card p { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 0.9rem; }
+
+    .badge { font-family: var(--mono); font-size: 11px; padding: 2px 8px; border-radius: 20px; border: 1px solid var(--border); color: var(--muted); }
+    .badge.ee  { background: #eef3fb; color: #2a4f8a; border-color: #c5d5ee; }
+    .badge.emb { background: #edf7f0; color: #1f6b3a; border-color: #b8dfc4; }
+    .badge.dsp { background: #fdf4e8; color: #7a4c0d; border-color: #f0d4a0; }
+    .badge.mech { background: #f3eefc; color: #5b3aa0; border-color: #d5c5f0; }
+
+    .project-links { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+    .project-links a {
+      font-size: 13px; color: var(--accent); text-decoration: none;
+      display: flex; align-items: center; gap: 4px; white-space: nowrap;
+    }
+    .project-links a:hover { text-decoration: underline; }
+    .project-links a svg { width: 13px; height: 13px; stroke: currentColor; }
+
+    .exp-list { display: flex; flex-direction: column; gap: 2rem; }
+    .exp-item { display: grid; grid-template-columns: 120px 1fr; gap: 1.5rem; }
+    .exp-date { font-family: var(--mono); font-size: 12px; color: var(--muted); padding-top: 2px; }
+    .exp-body h3 { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+    .exp-body .company { font-size: 13px; color: var(--muted); margin-bottom: 0.6rem; }
+    .exp-body p { font-size: 14px; color: var(--muted); }
+    .exp-body ul { font-size: 14px; color: var(--muted); padding-left: 1.2rem; }
+    .exp-body ul li { margin-bottom: 0.25rem; }
+
+    .contact-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
+    .contact-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); text-decoration: none; }
+    .contact-item:hover { color: var(--text); }
+    .contact-item svg { width: 16px; height: 16px; stroke: currentColor; flex-shrink: 0; }
+
+    footer {
+      padding: 2.5rem 0; max-width: var(--max); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--mono); font-size: 12px; color: var(--muted);
+      flex-wrap: wrap; gap: 0.5rem;
+    }
+
+    @media (max-width: 560px) {
+      .exp-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-links { flex-direction: row; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="#" class="logo">agnel.joseph</a>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero">
+    <p class="hero-eyebrow">Electrical Engineering</p>
+    <h1>Hi, I'm <span>Agnel Joseph</span>.<br>I build circuits,<br>firmware &amp; systems.</h1>
+    <p>
+      Penultimate-year Electrical Engineering student at UQ, Brisbane.
+      Passionate about bridging hardware and software. From PCB design and
+      microcontroller firmware to signal analysis and real-time control systems.
+    </p>
+    <div class="hero-links">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="https://linkedin.com/in/agneljoseph" class="btn btn-ghost" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <p class="section-label">Projects</p>
+    <div class="projects-list">
+
+      <div class="project-card">
+        <div>
+          <div class="meta">
+            <span class="badge ee">PCB Design</span>
+            <span class="badge dsp">Instrumentation</span>
+          </div>
+          <h3>AC/DC Power Meter with RTC</h3>
+          <p>Group PCB project designing a multi-function power meter capable of measuring various DC and AC measurements. Integrated a real-time clock (RTC) module for timestamped logging. Designed schematic and layout in Altium Designer, including component selection, trace routing, and design rule checking.</p>
+          <div class="tags">
+            <span class="tag">Altium Designer</span>
+            <span class="tag">PCB Layout</span>
+            <span class="tag">AC/DC Measurement</span>
+            <span class="tag">RTC</span>
+            <span class="tag">Signal Conditioning</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="meta">
+            <span class="badge emb">Embedded</span>
+            <span class="badge mech">Radio / Control</span>
+          </div>
+          <h3>Radio-Controlled Drawing Machine</h3>
+          <p>Programmed a microcontroller to wirelessly control a large-format drawing machine via radio transmission. Used a multifunctional shield and switchbank as the input interface, translating user inputs into movement commands transmitted over RF to the drawing mechanism. Focused on reliable packet handling and responsive real-time control.</p>
+          <div class="tags">
+            <span class="tag">C</span>
+            <span class="tag">RF / Radio TX</span>
+            <span class="tag">Microcontroller</span>
+            <span class="tag">Real-Time Control</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="meta">
+            <span class="badge emb">Embedded</span>
+            <span class="badge ee">Control Systems</span>
+          </div>
+          <h3>Microcontroller-Based Elevator Emulator</h3>
+          <p>Developed control logic for a microcontroller-based elevator emulator, managing motor movement, LED floor indicators, and a traveller queue system to simulate real-world elevator scheduling and dispatch behaviour.</p>
+          <div class="tags">
+            <span class="tag">C</span>
+            <span class="tag">Microcontroller</span>
+            <span class="tag">Motor Control</span>
+            <span class="tag">GPIO</span>
+            <span class="tag">Queue Logic</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="meta">
+            <span class="badge mech">Mechanical</span>
+            <span class="badge ee">Drive Systems</span>
+          </div>
+          <h3>Flood-Resistant Floating Houseboat</h3>
+          <p>Led the design of a twin-propeller drive system with independent motor controllers, enabling precise multidirectional manoeuvrability and improved performance against strong currents.</p>
+          <div class="tags">
+            <span class="tag">Motor Controllers</span>
+            <span class="tag">Drive System Design</span>
+            <span class="tag">Redundancy</span>
+            <span class="tag">Systems Design</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <p class="section-label">Skills &amp; Tools</p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Hardware &amp; PCB</h3>
+        <div class="tags">
+          <span class="tag">Altium Designer</span>
+          <span class="tag">PCB Layout</span>
+          <span class="tag">Schematic Capture</span>
+          <span class="tag">Op-Amps</span>
+          <span class="tag">BJTs / MOSFETs</span>
+          <span class="tag">Soldering</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Embedded &amp; Firmware</h3>
+        <div class="tags">
+          <span class="tag">C</span>
+          <span class="tag">Python</span>
+          <span class="tag">Microcontrollers</span>
+          <span class="tag">GPIO / Interrupts</span>
+          <span class="tag">Motor Control</span>
+          <span class="tag">RF / Radio TX</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Measurement &amp; Analysis</h3>
+        <div class="tags">
+          <span class="tag">AC/DC Measurement</span>
+          <span class="tag">Signal Conditioning</span>
+          <span class="tag">RTC Integration</span>
+          <span class="tag">Oscilloscope</span>
+          <span class="tag">Logic Analyser</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Software &amp; Tools</h3>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">MATLAB</span>
+          <span class="tag">Git</span>
+          <span class="tag">Linux</span>
+          <span class="tag">CAD (introductory)</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Concepts</h3>
+        <div class="tags">
+          <span class="tag">Control Systems</span>
+          <span class="tag">Power Electronics</span>
+          <span class="tag">Signal Processing</span>
+          <span class="tag">Circuit Design</span>
+          <span class="tag">Drive Systems</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Professional</h3>
+        <div class="tags">
+          <span class="tag">Project Planning</span>
+          <span class="tag">Technical Reporting</span>
+          <span class="tag">Team Leadership</span>
+          <span class="tag">Data Integrity</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience & Education -->
+  <section id="experience">
+    <p class="section-label">Experience &amp; Education</p>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <span class="exp-date">2024 – Present</span>
+        <div class="exp-body">
+          <h3>Administration Officer</h3>
+          <p class="company">Queensland Health – Aged Care Assessment Service · Brisbane, QLD</p>
+          <ul>
+            <li>Coordinated appointment scheduling across multidisciplinary clinical teams using CHIMS and MAC Portal systems.</li>
+            <li>Maintained and audited sensitive patient records, upholding accuracy, compliance, and data integrity standards.</li>
+            <li>Optimised administrative workflows, increasing operational efficiency across the service.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <span class="exp-date">2023 – Present</span>
+        <div class="exp-body">
+          <h3>Executive Team Secretary / Treasurer</h3>
+          <p class="company">SMYM Brisbane South</p>
+          <ul>
+            <li>Organised and led annual general meetings to strategise future organisational developments.</li>
+            <li>Facilitated communication and monetary flow between the executive team and sponsors.</li>
+            <li>Prepared performance reports to support data-informed decision-making.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <span class="exp-date">2022 – 2024</span>
+        <div class="exp-body">
+          <h3>Customer Service Assistant</h3>
+          <p class="company">Kmart Calamvale · Brisbane, QLD</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <span class="exp-date">2023 – 2027</span>
+        <div class="exp-body">
+          <h3>Bachelor of Engineering (Honours) – Electrical Specialisation</h3>
+          <p class="company">The University of Queensland · Brisbane, QLD</p>
+          <p>Expected graduation 2027. Coursework includes circuits, embedded systems, signal processing, power electronics, and control theory.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <span class="exp-date">2019 – 2021</span>
+        <div class="exp-body">
+          <h3>International Baccalaureate — IB 41 (ATAR 98.55 equivalent)</h3>
+          <p class="company">Queensland Academy for Science, Mathematics and Technology</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <p style="font-size: 17px; font-weight: 300; max-width: 480px;">
+      Feel free to get in touch.
+    </p>
+    <div class="contact-row">
+      <a href="mailto:agneljoseph94@gmail.com" class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+        agneljoseph94@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/agneljoseph" class="contact-item" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin.com/in/agneljoseph
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <span>© 2026 Agnel Joseph</span>
+  <span>Built with HTML · Hosted on GitHub Pages</span>
+</footer>
+
+</body>
+</html>
